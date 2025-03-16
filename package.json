@@ -1,0 +1,11 @@
+{
+  "name": "nineamposts",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"cd client && npm run dev\" \"cs server && npm run dev\""
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
