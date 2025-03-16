@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import routes from 'routes/index.js'
 
 // Load environment variables
 dotenv.config();
@@ -11,14 +12,18 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/api', routes);
+
+// aTODO: replace test user auth with real auth when real auth is implemented
+function testUser(req, res, next) {
+    req.user = { _id: new ObjectId('testuser') }
+}
+
+app.use(testUser);
+
 // Routes
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to the Express server!" });
-});
-
-// 404 Handler
-app.use((req, res) => {
-    res.status(404).json({ error: "Route not found" });
 });
 
 // Error Handler
