@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import routes from 'routes/index.js'
+import routes from "./routes/index.js";
 
 // Load environment variables
 dotenv.config();
@@ -12,27 +12,27 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api', routes);
+app.use("/api", routes);
 
-// aTODO: replace test user auth with real auth when real auth is implemented
+// TODO: replace test user auth with real auth when real auth is implemented
 function testUser(req, res, next) {
-    req.user = { _id: new ObjectId('testuser') }
+  //
 }
 
 app.use(testUser);
 
 // Routes
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome to the Express server!" });
+  res.json({ message: "Welcome to the Express server!" });
 });
 
 // Error Handler
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ error: "Internal Server Error" });
+  console.error(err.stack);
+  res.status(500).json({ error: "Internal Server Error" });
 });
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
